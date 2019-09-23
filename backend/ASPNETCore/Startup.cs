@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ASPNETCore.Extensions;
+using ASPNETCore.Repositories;
+using AspNetCoreAngularSignalR.Hubs;
+using AspNetCoreAngularSignalR.Repositories;
+using AspNetCoreAngularSignalR.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ASPNETCore.Repositories;
-using AspNetCoreAngularSignalR.Repositories;
-using AspNetCoreAngularSignalR.Models;
-using AspNetCoreAngularSignalR.Dtos;
-using AspNetCoreAngularSignalR.Services;
 using Microsoft.Extensions.Hosting;
-using AspNetCoreAngularSignalR.Hubs;
-using ASPNETCore.Extensions;
 
 namespace ASPNETCore
 {
@@ -35,7 +33,8 @@ namespace ASPNETCore
                 options.AddPolicy(CorsPolicy,
                     builder =>
                     {
-                        builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
+                        builder.SetIsOriginAllowed(host => true).
+                       AllowAnyHeader().AllowAnyMethod().AllowCredentials();
                     });
             });
 
